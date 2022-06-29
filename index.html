@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/css.css">
+  <title>Hunting Bees</title>
+
+</head>
+<body>
+  <div id="container">
+    <input type="button" value="開始" id="btn-start" class="btn-start">
+    <br>
+    <p class="w1">分數:<span id="text-score">0</span>分</p>
+    <p class="w1">剩餘:<span id="text-time">0</span>秒</p>
+    <!-- <hr style="border: 3px solid #fe3; border-radius:50px ">  -->
+    <br>
+    <div id="game"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    let score = 0
+    let countdown = 0
+    let timer = 0
+    let honeyPic = 0
+
+    function move (bee) {
+      const top = Math.round(Math.random() * 70) + '%'
+      const left = Math.round(Math.random() * 70) + '%'
+      // const scale = Math.round(Math.random() * 70) + '%'
+      bee.stop().animate({top, left}, 1000, function () {
+        move(bee)
+      })
+    }
+
+    function pauseHoverAnimate() {
+      $('#btn-start').css("background", "#664100").
+      css('color', '#888')
+      $('#btn-start').removeClass('btn-start')
+    }
+
+    function resumeHoverAnimate() {
+      $('#btn-start').css("background", '')
+      .css('color', '')
+      $('#btn-start').addClass('btn-start')
+    }
+
+    $('#btn-start').click(function () {
+      // 停用按鈕
+      $(this).attr('disabled', true)
+      pauseHoverAnimate()
+      // 重設
+      score = 0
+      $('#text-score').text(score)
+      countdown = 30 // 遊戲時長
+      $('#text-time').text(countdown)
+
+      // 開始遊戲
+      timer = setInterval(function () {
+        // 倒數
+        console.log(countdown)
+        countdown--
+        $('#text-time').text(countdown)
+
+        const random = Math.round(Math.random() * 9)
+        if (random > 3 && $('#game .bee').length < 7) {
+          const top = Math.round(Math.random() * 70) + '%'
+          const left = Math.round(Math.random() * 70) + '%'
+          const bee = $(`<img src="./bee.gif" class="bee" style="top: ${top}; left: ${left}">`)
+
+          $('#game').append(bee)
+          move(bee)
+        }
+
+        if (countdown <= 0) {
+          clearInterval(timer)
+          // 清空遊戲區域
+          $('#game img').remove()
+          // 重新啟用開始按鈕
+          $('#btn-start').attr('disabled', false)
+          resumeHoverAnimate()
+          Swal.fire({
+            title: '遊戲結束',
+            text: `時間到，你得到 ${score} 分`,
+            icon: 'info'
+          })
+        } 
+      }, 1000)
+      
+    })
+
+    $('#game').on('click', '.bee', function () {
+      honeyPic = Math.round(Math.random() * 9) + 1
+      $(this).attr('src', `./honey-${honeyPic}.png`)
+      $(this).removeClass('bee').addClass('honey')
+      $(this).stop()
+      score++
+      $('#text-score').text(score)
+    })
+
+  </script>
+  
+</body>
+</html>

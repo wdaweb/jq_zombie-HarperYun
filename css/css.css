@@ -1,0 +1,104 @@
+html {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(yellow 35%, red 35%, red 75%, yellow 75%, yellow 100%);
+  background-repeat: no-repeat;
+  cursor: url(../finger.png) 1 1, auto;
+
+}
+
+#container {
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#btn-start {
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(#e29100, #664100);
+}
+
+.btn-start:hover {
+  transform: scale(1.2);
+  transition-duration: .5s;
+  cursor: url(../finger.png) 1 1, auto;
+}
+
+.btn-start:active {
+  transform: scale(.9);
+  transition-duration: .5s;
+  cursor: url(../finger.png) 1 1, auto;
+}
+
+/* ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------ */
+
+/* 黑底方格 */
+#game {
+  width: 600px;
+  height: 600px;
+  background: linear-gradient(#530, #000);
+  border-radius: 5%;
+  overflow: hidden;
+  position: relative;
+  cursor: url(../flame-net-1.png) 5 25, auto;
+  /* cursor: url(./cursor.png) 50 50, auto; */
+  box-shadow: 0 20px 15px 5px rgba(45, 10, 10, 0.6);
+}
+
+#game:active {
+  cursor: url(../flame-net-2.png) 5 30, auto;
+}
+
+#game img {
+  position: absolute;
+  /* 無法被選取 */
+  user-select: none;
+  /* 無法拖曳 */
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+
+/* 蜜蜂圖片 */
+.bee {
+  height: 13%;
+}
+
+/* 一灘蜂蜜圖片 */
+.honey {
+  /* 忽略點擊事件 */
+  pointer-events: none;
+  height: 10%;
+}
+
+input {
+  width: 100px;
+  height: 50px;
+  font-size: 20px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.w1 {
+  color: #664100;
+  font-size: 20px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* 插圖來源 */
+
+/* 蜜蜂 */
+/* Illustration by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a> */
+
+/* 手指 */
+/* Illustration by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a> */
+
+/* 網子 */
+/* Illustration by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a> */
+
+/* 禁止 */
+/* Illustration by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a> */
